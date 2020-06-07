@@ -1,10 +1,14 @@
-#include <Arduino.h>
 #include <MCP23017.h>
 
-MCP23017 mcp = MCP23017(0x20);
+#define MCP23017_ADDR 0x20
+
+// Set pin numbers for your configuration.
+const uint8_t SCL_PIN = A4;
+const uint8_t SDA_PIN = A5;
+
+MCP23017<SCL_PIN, SDA_PIN> mcp(MCP23017_ADDR);
 
 void setup() {
-    Wire.begin();
     mcp.init();
 
     Serial.begin(115200);

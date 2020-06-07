@@ -5,13 +5,16 @@
  * Connect digital pin 3 to MCP23017 INTB pin.
  * You'll also need a small cap (100nF tipically) between the arduino interrupt pin and GND.
  */
-#include <Wire.h>
 #include <MCP23017.h>
 
 #define MCP23017_ADDR 0x20
 #define INT_PIN 3
 
-MCP23017 mcp = MCP23017(MCP23017_ADDR);
+// Set pin numbers for your configuration.
+const uint8_t SCL_PIN = A4;
+const uint8_t SDA_PIN = A5;
+
+MCP23017<SCL_PIN, SDA_PIN> mcp(MCP23017_ADDR);
 
 volatile bool interrupted = false;
 
@@ -20,7 +23,6 @@ void userInput() {
 }
 
 void setup() {
-    Wire.begin();
     Serial.begin(115200);
     
     mcp.init();

@@ -7,14 +7,17 @@
  * 
  * You can also uncomment one line to invert the input (when pressing a button the corresponding led is lit)
  */
-#include <Wire.h>
 #include <MCP23017.h>
 
 #define MCP23017_ADDR 0x20
-MCP23017 mcp = MCP23017(MCP23017_ADDR);
+
+// Set pin numbers for your configuration.
+const uint8_t SCL_PIN = A4;
+const uint8_t SDA_PIN = A5;
+
+MCP23017<SCL_PIN, SDA_PIN> mcp(MCP23017_ADDR);
 
 void setup() {
-    Wire.begin();
     Serial.begin(115200);
     
     mcp.init();
